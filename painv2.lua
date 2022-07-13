@@ -61,15 +61,11 @@ input.InputBegan:Connect(function(key)
         print(stuff)
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
-            local secondCount = 3
             print("COUNT CHECK: ",count)
             if word:sub(1, 1) == "(" then
-                if secondCount % 3 == 0 then
-                    print("STOP POINT FOUND: ",count)
-                    table.insert(stopPoints, count)
-                    table.insert(newCoords, string.sub(word, 2))
-                    secondCount = secondCount + 1
-                end
+                print("STOP POINT FOUND: ",count)
+                table.insert(stopPoints, count)
+                table.insert(newCoords, string.sub(word, 2))
             else
                 table.insert(newCoords, word)
             end
@@ -87,7 +83,7 @@ input.InputBegan:Connect(function(key)
         end
         for i,v in pairs(CFrames) do
             for i,v in pairs(stopPoints) do
-                print("STOP POINTS", i,v)
+                print("STOP POINTS ", v/3)
             end
             print("NEW CFRAMES "..i,v)
             if first then
