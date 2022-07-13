@@ -66,10 +66,11 @@ input.InputBegan:Connect(function(key)
                 table.insert(newCoords, string.sub(word, 2))
             end
             table.insert(newCoords, word)
-            for i,v in pairs(newCoords) do
-                print("CHECKING COORD TABLE: ", i, v)
-            end
+            
             print("Check 3")
+        end
+        for i,v in pairs(newCoords) do
+            print("CHECKING COORD TABLE: ", i, v)
         end
         for i,v in pairs(newCoords) do
             if (i+2)%3 == 0 then
