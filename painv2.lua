@@ -60,6 +60,7 @@ input.InputBegan:Connect(function(key)
         print(stuff)
         for word in stuff:gmatch("(.-)".." ") do  
             local count = count + 1
+            print("COUNT CHECK: ",count)
             if word:sub(1, 1) == "(" then
                 print("STOP POINT FOUND: ",count)
                 table.insert(stopPoints, count)
