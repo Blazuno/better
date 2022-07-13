@@ -1,4 +1,5 @@
 local first = true
+local first2 = true
 local folderDubs = Instance.new("Folder", game.Workspace)
 folderDubs.Name = "folderDubs"
 input = game:GetService("UserInputService")
@@ -15,7 +16,10 @@ end
 input.InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.E then 
         print("Precheck")
-        writefile("path.txt", "")
+        if first2 then
+            writefile("path.txt", "")
+            first2 = false
+        end
         local sphere = Instance.new('Part')
         sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
         sphere.Shape = Enum.PartType.Ball -- Make it a sphere
