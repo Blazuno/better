@@ -60,8 +60,7 @@ input.InputBegan:Connect(function(key)
         print(stuff)
         for word in stuff:gmatch("(.-)".." ") do  
             local count = count + 1
-            if tostring(word):find("%(") then
-                print(word:sub(2))
+            if word:sub(1, 1) == "(" then
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             else
@@ -93,7 +92,6 @@ input.InputBegan:Connect(function(key)
                 local temp1 = Vector3.new(v.x, v.y, v.z)
                 local temp2 = Vector3.new(temp.x, temp.y, temp.z)
                 local distance = (temp1 - temp2).magnitude
-                local newSpeed = speed/32
                 local time = calculateTime(speed, distance)
                 tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                 wait(time)
