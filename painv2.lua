@@ -1,4 +1,3 @@
---touch nothing beyond this point
 local first = true
 local first2 = true
 local count = 0
@@ -56,6 +55,7 @@ input.InputBegan:Connect(function(key)
         local newCoords = {}
         local CFrames = {} 
         local stopPoints = {}
+        local stopPoints2 = {}
         if not isfile("path.txt") then return end
         stuff = readfile("path.txt")
         print(stuff)
@@ -83,9 +83,13 @@ input.InputBegan:Connect(function(key)
         end
         for i,v in pairs(CFrames) do
             for i,v in pairs(stopPoints) do
-                print("STOP POINTS ", v/3)
+                if v % 3 == 0 then
+                    stopPoints2:insert(v)
+                end
             end
-            print("NEW CFRAMES "..i,v)
+            for i,v in pairs(stopPoinst2) do
+                print("STOP POINTS ",v)
+            end
             if first then
                 local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
                 tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
