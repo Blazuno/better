@@ -1,4 +1,3 @@
---touch nothing beyond this point
 local first = true
 local folderDubs = Instance.new("Folder", game.Workspace)
 folderDubs.Name = "folderDubs"
@@ -54,6 +53,7 @@ input.InputBegan:Connect(function(key)
         local stopPoints = {}
         if not isfile("path.txt") then return end
         stuff = readfile("path.txt")
+        print(stuff)
         for word in stuff:gmatch("(.-)".." ") do  
             local count = count + 1
             if tostring(word):find("%(") then
@@ -61,7 +61,7 @@ input.InputBegan:Connect(function(key)
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             end
-            table.insert(newCoords, word) 
+            table.insert(newCoords, word)
             for i,v in pairs(newCoords) do
                 print("CHECKING COORD TABLE: ", i, v)
             end
