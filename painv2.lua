@@ -1,3 +1,8 @@
+--E TO MAKE A POINT
+--Y TO DELETE PATH
+--H TO START THE BOT
+--NOTE THAT IF YOU HAVE A PATH SAVED AND WANT TO START A NEW ONE THAT YOU PRESS Y BEFORE STARTING OTHERWISE IT WILL HEAVILY BUG AND MAYBE CRASH/BAN YOU
+
 --touch nothing beyond this point
 local first = true
 local folderDubs = Instance.new("Folder", game.Workspace)
@@ -44,25 +49,29 @@ input.InputBegan:Connect(function(key)
         folderDubs.Name = "folderDubs"
         delfile("path.txt")
     end
+    print("Precheck")
     if key.KeyCode == Enum.KeyCode.H then
+        print("Check 1")
         local newCoords = {}
         local CFrames = {} 
         local stopPoints = {}
-        if isfile("path.txt") then
-            stuff = readfile("path.txt")
-            for i, word in stuff:gmatch("(.-)".." ") do  
-                if tostring(word):find("%(") then
-                    print("Check 3")
-                    table.insert(stopPoints, i)
-                    table.insert(newCoords, string.sub(word, 2))
-                end
-                table.insert(newCoords, word) 
+        if not isfile("path.txt") then return end
+        stuff = readfile("path.txt")
+        for i, word in stuff:gmatch("(.-)".." ") do  
+            if tostring(word):find("%(") then
+                print("Check 2")
+                table.insert(stopPoints, i)
+                table.insert(newCoords, string.sub(word, 2))
             end
-            for i,v in pairs(newCoords) do
-                if (i+2)%3 == 0 then
-                    table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
-                end
+            table.insert(newCoords, word) 
+            print("Check 3")
+        end
+        for i,v in pairs(newCoords) do
+            if (i+2)%3 == 0 then
+                table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+                print("Check 4")
             end
+            print("Check 5")
         end
         for i,v in pairs(CFrames) do
             for i,v in pairs(stopPoints) do
