@@ -19,7 +19,6 @@ end
 
 
 input.InputBegan:Connect(function(key)
-    print("Checking")
     if key.KeyCode == Enum.KeyCode.E then 
         print("Precheck")
         writefile("path.txt", "")
@@ -52,7 +51,6 @@ input.InputBegan:Connect(function(key)
         folderDubs.Name = "folderDubs"
         delfile("path.txt")
     end
-    print("Another another precheck")
     if key.KeyCode == Enum.KeyCode.H then
         print("Check 1")
         local newCoords = {}
@@ -67,6 +65,9 @@ input.InputBegan:Connect(function(key)
                 table.insert(newCoords, string.sub(word, 2))
             end
             table.insert(newCoords, word) 
+            for i,v in pairs(newCoords) do
+                print("CHECKING COORD TABLE: ", i, v)
+            end
             print("Check 3")
         end
         for i,v in pairs(newCoords) do
