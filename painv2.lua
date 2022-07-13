@@ -5,7 +5,6 @@
 
 --touch nothing beyond this point
 local first = true
-local coordTable = {}
 local folderDubs = Instance.new("Folder", game.Workspace)
 folderDubs.Name = "folderDubs"
 input = game:GetService("UserInputService")
@@ -42,8 +41,8 @@ input.InputBegan:Connect(function(key)
         sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
         sphere.Parent = game.Workspace.folderDubs -- Parent it
         sphere.Material = Enum.Material.Neon
-
         appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
+    end
     if key.KeyCode == Enum.KeyCode.Y then
         folderDubs:Destroy()
         folderDubs = Instance.new("Folder", game.Workspace)
@@ -61,7 +60,8 @@ input.InputBegan:Connect(function(key)
                 if (i+2)%3 == 0 then
                     if stuff:find("(") then
                         table.insert(stopPoints, i)
-                    table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+                         table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+                    end
                 end
             end
         end
