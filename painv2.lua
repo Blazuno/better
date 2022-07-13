@@ -52,8 +52,10 @@ input.InputBegan:Connect(function(key)
             stuff = readfile("path.txt")
             for i, word in stuff:gmatch("(.-)".." ") do  
                 if tostring(word):find("(") then
-                    table.insert(newCoords, word) 
+                    table.insert(stopPoints, i)
+                    table.insert(newCoords, string.sub(word, 2))
                 end
+                table.insert(newCoords, word) 
             end
             for i,v in pairs(newCoords) do
                 if (i+2)%3 == 0 then
