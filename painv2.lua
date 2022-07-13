@@ -64,9 +64,9 @@ input.InputBegan:Connect(function(key)
                 print(word:sub(2))
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
+            else
+                table.insert(newCoords, word)
             end
-            table.insert(newCoords, word)
-            
             print("Check 3")
         end
         for i,v in pairs(newCoords) do
