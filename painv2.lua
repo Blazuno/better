@@ -26,7 +26,7 @@ input.InputBegan:Connect(function(key)
         sphere.Material = Enum.Material.Neon
         appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
     end
-    if key.KeyCode == Enum.KeyCode.H then
+    if key.KeyCode == Enum.KeyCode.J then
         local sphere = Instance.new('Part')
         sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
         sphere.Shape = Enum.PartType.Ball -- Make it a sphere
