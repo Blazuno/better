@@ -41,7 +41,7 @@ input.InputBegan:Connect(function(key)
         sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
         sphere.Parent = game.Workspace.folderDubs -- Parent it
         sphere.Material = Enum.Material.Neon
-        appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
+        appendfile("path.txt", "("..sphere.Position.x.." ".."("..sphere.Position.y.." ".."("..sphere.Position.z.." ")
     end
     if key.KeyCode == Enum.KeyCode.Y then
         folderDubs:Destroy()
