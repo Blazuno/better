@@ -19,7 +19,9 @@ end
 
 
 input.InputBegan:Connect(function(key)
+    print("Checking")
     if key.KeyCode == Enum.KeyCode.E then 
+        print("Precheck")
         writefile("path.txt", "")
         local sphere = Instance.new('Part')
         sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
@@ -32,6 +34,7 @@ input.InputBegan:Connect(function(key)
         appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
     end
     if key.KeyCode == Enum.KeyCode.J then
+        print("Another precheck")
         local sphere = Instance.new('Part')
         sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
         sphere.Shape = Enum.PartType.Ball -- Make it a sphere
@@ -49,7 +52,7 @@ input.InputBegan:Connect(function(key)
         folderDubs.Name = "folderDubs"
         delfile("path.txt")
     end
-    print("Precheck")
+    print("Another another precheck")
     if key.KeyCode == Enum.KeyCode.H then
         print("Check 1")
         local newCoords = {}
