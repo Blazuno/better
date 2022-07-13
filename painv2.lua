@@ -1,8 +1,3 @@
---E TO MAKE A POINT
---Y TO DELETE PATH
---H TO START THE BOT
---NOTE THAT IF YOU HAVE A PATH SAVED AND WANT TO START A NEW ONE THAT YOU PRESS Y BEFORE STARTING OTHERWISE IT WILL HEAVILY BUG AND MAYBE CRASH/BAN YOU
-
 --touch nothing beyond this point
 local first = true
 local folderDubs = Instance.new("Folder", game.Workspace)
@@ -55,13 +50,14 @@ input.InputBegan:Connect(function(key)
         local stopPoints = {}
         if isfile("path.txt") then
             stuff = readfile("path.txt")
-            for word in stuff:gmatch("(.-)".." ") do  table.insert(newCoords, word) end
+            for i, word in stuff:gmatch("(.-)".." ") do  
+                if tostring(word):find("(") then
+                    table.insert(newCoords, word) 
+                end
+            end
             for i,v in pairs(newCoords) do
                 if (i+2)%3 == 0 then
-                    if stuff:find("(") then
-                        table.insert(stopPoints, i)
-                         table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
-                    end
+                    table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
                 end
             end
         end
