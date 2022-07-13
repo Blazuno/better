@@ -1,3 +1,4 @@
+--touch nothing beyond this point
 local first = true
 local first2 = true
 local count = 0
@@ -60,11 +61,15 @@ input.InputBegan:Connect(function(key)
         print(stuff)
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
+            local secondCount = 3
             print("COUNT CHECK: ",count)
             if word:sub(1, 1) == "(" then
-                print("STOP POINT FOUND: ",count)
-                table.insert(stopPoints, count)
-                table.insert(newCoords, string.sub(word, 2))
+                if secondCount % 3 == 0 then
+                    print("STOP POINT FOUND: ",count)
+                    table.insert(stopPoints, count)
+                    table.insert(newCoords, string.sub(word, 2))
+                    secondCount = secondCount + 1
+                end
             else
                 table.insert(newCoords, word)
             end
