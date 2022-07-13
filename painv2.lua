@@ -16,7 +16,6 @@ end
 
 input.InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.E then 
-        print("Precheck")
         if first2 then
             writefile("path.txt", "")
             first2 = false
@@ -51,7 +50,6 @@ input.InputBegan:Connect(function(key)
         delfile("path.txt")
     end
     if key.KeyCode == Enum.KeyCode.H then
-        print("Check 1")
         local newCoords = {}
         local CFrames = {} 
         local stopPoints = {}
@@ -69,7 +67,6 @@ input.InputBegan:Connect(function(key)
             else
                 table.insert(newCoords, word)
             end
-            print("Check 3")
         end
         for i,v in pairs(newCoords) do
             print("CHECKING COORD TABLE: ", i, v)
@@ -77,9 +74,7 @@ input.InputBegan:Connect(function(key)
         for i,v in pairs(newCoords) do
             if (i+2)%3 == 0 then
                 table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
-                print("Check 4")
             end
-            print("Check 5")
         end
         for i,v in pairs(CFrames) do
             for i,v in pairs(stopPoints) do
@@ -87,7 +82,7 @@ input.InputBegan:Connect(function(key)
                     stopPoints2:insert(v)
                 end
             end
-            for i,v in pairs(stopPoinst2) do
+            for i,v in pairs(stopPoints2) do
                 print("STOP POINTS ",v)
             end
             if first then
