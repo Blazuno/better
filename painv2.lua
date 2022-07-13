@@ -1,5 +1,6 @@
 local first = true
 local first2 = true
+local count = 0
 local folderDubs = Instance.new("Folder", game.Workspace)
 folderDubs.Name = "folderDubs"
 input = game:GetService("UserInputService")
@@ -50,7 +51,6 @@ input.InputBegan:Connect(function(key)
         delfile("path.txt")
     end
     if key.KeyCode == Enum.KeyCode.H then
-        local count = 0
         print("Check 1")
         local newCoords = {}
         local CFrames = {} 
