@@ -61,6 +61,7 @@ input.InputBegan:Connect(function(key)
         for word in stuff:gmatch("(.-)".." ") do  
             local count = count + 1
             if word:sub(1, 1) == "(" then
+                print("STOP POINT FOUND: ",count)
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             else
