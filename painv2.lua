@@ -1,8 +1,3 @@
---E TO MAKE A POINT
---Y TO DELETE PATH
---H TO START THE BOT
---NOTE THAT IF YOU HAVE A PATH SAVED AND WANT TO START A NEW ONE THAT YOU PRESS Y BEFORE STARTING OTHERWISE IT WILL HEAVILY BUG AND MAYBE CRASH/BAN YOU
-
 --touch nothing beyond this point
 local first = true
 local folderDubs = Instance.new("Folder", game.Workspace)
@@ -52,16 +47,18 @@ input.InputBegan:Connect(function(key)
         delfile("path.txt")
     end
     if key.KeyCode == Enum.KeyCode.H then
+        local count = 0
         print("Check 1")
         local newCoords = {}
         local CFrames = {} 
         local stopPoints = {}
         if not isfile("path.txt") then return end
         stuff = readfile("path.txt")
-        for i, word in stuff:gmatch("(.-)".." ") do  
+        for word in stuff:gmatch("(.-)".." ") do  
+            local count = count + 1
             if tostring(word):find("%(") then
                 print("Check 2")
-                table.insert(stopPoints, i)
+                table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             end
             table.insert(newCoords, word) 
