@@ -190,6 +190,7 @@ input.InputBegan:Connect(function(key)
                             wait(trinketSpawnWaitTimes)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                         end
+                                    wait()
                     end 
                 else
                     local temp = CFrames[i+1]
