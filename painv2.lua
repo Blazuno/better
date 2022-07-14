@@ -32,25 +32,22 @@ function autoPickup(connectTrinket)
             for i,v in pairs(game.Workspace:GetChildren()) do
                 local _, trinket = detectTrinkets(v)
                 if _ then
-                    if v.Size == Vector3.new(0.208974, 0.554892, 0.457498) and pickupScrolls or v.Size ~= Vector3.new(0.208974, 0.554892, 0.457498)  then
-                            local part = trinket:WaitForChild("Part")
-                            local clickdetector = part:WaitForChild("ClickDetector")
-                            local maxDistance = clickdetector.MaxActivationDistance - 0.1
-                            while not player.Character:FindFirstChild("Head") do 
-                                wait(0.1)
-                            end
-                            if player:DistanceFromCharacter(part.Position) < maxDistance and player.Character.Head then
-                                fireclickdetector(clickdetector)
-                            end
-                            if connectTrinket then
-                                local part = connectTrinket:FindFirstChild("Part")
-                                local clickdetector2 = part:FindFirstChild("ClickDetector")
-                                if player:DistanceFromCharacter(part.Position) < maxDistance and player.Character.Head then
-                                    fireclickdetector(clickdetector2)
-                                end
-                            end
-                            
+                    local part = trinket:WaitForChild("Part")
+                    local clickdetector = part:WaitForChild("ClickDetector")
+                    local maxDistance = clickdetector.MaxActivationDistance - 0.1
+                    while not player.Character:FindFirstChild("Head") do 
+                        wait(0.1)
                     end
+                    if player:DistanceFromCharacter(part.Position) < maxDistance and player.Character.Head then
+                        fireclickdetector(clickdetector)
+                    end
+                    if connectTrinket then
+                        local part = connectTrinket:FindFirstChild("Part")
+                        local clickdetector2 = part:FindFirstChild("ClickDetector")
+                        if player:DistanceFromCharacter(part.Position) < maxDistance and player.Character.Head then
+                            fireclickdetector(clickdetector2)
+                        end
+                    end         
                 end
             end
             wait()
@@ -135,16 +132,6 @@ input.InputBegan:Connect(function(key)
     end
     if key.KeyCode == Enum.KeyCode.H then
         autoPickup()
-        local Mt = getrawmetatable(game)
-        local Old = Mt.__namecall
-        setreadonly(Mt, false)
-        Mt.__namecall = newcclosure(function(Self, ...)
-            local Args = {...}
-            local Method = getnamecallmethod()
-            if not checkcaller() and Args[1] == "ApplyFallDamage" then
-                return ReplicatedStorage
-            end
-        end)
         local newCoords = {}
         local CFrames = {} 
         local stopPoints = {}
