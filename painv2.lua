@@ -179,9 +179,9 @@ input.InputBegan:Connect(function(key)
                     wait(time)
                     for i2,vd in pairs(stopPoints2) do
                         if i == vd/3 then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                            game.Players.LocalPlayer.Character.Torso.Anchored = true
                             wait(trinketSpawnWaitTimes)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                            game.Players.LocalPlayer.Character.Torso.Anchored = false
                         end
                                     writefile("crashlogs.txt", "CRASHED POINT 4")
                     end 
