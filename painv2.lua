@@ -140,6 +140,15 @@ input.InputBegan:Connect(function(key)
         if not isfile("path.txt") then return end
         stuff = readfile("path.txt")
         print(stuff)
+        local Mt = getrawmetatable(game)
+        local Old = Mt.__namecall
+        setreadonly(Mt, false)
+        Mt.__namecall = newcclosure(function(Self, ...)
+        local Args = {...}
+        local Method = getnamecallmethod()
+        if not checkcaller() and Args[1] == "ApplyFallDamage" then
+            return ReplicatedStorage
+        end
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
             print("COUNT CHECK: ",count)
@@ -201,5 +210,7 @@ input.InputBegan:Connect(function(key)
             end
         wait(lootCycleWaitTimes*60)
         end
-    end
+    end)
+end
 end)
+
