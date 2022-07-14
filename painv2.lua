@@ -212,6 +212,7 @@ input.InputBegan:Connect(function(key)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                         end
                     end
+                                wait()
                 end
                             wait()
             end
