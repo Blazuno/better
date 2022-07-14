@@ -30,6 +30,7 @@ function autoPickup(connectTrinket)
         local player = game.Players.LocalPlayer
         while isAutoPickup do
             local leWorkspace = game.Workspace:GetChildren()
+            print("DEBUG TABLE TYPE CHECK: ",type(leWorkspace))
             for i,v in pairs(leWorkspace) do
                 local _, trinket = detectTrinkets(v)
                 if _ then
