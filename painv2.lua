@@ -29,8 +29,8 @@ function autoPickup(connectTrinket)
     spawn(function()
         local player = game.Players.LocalPlayer
         while isAutoPickup do
-            local workspace = game.Workspace:GetChildren()
-            for i,v in pairs(workspace) do
+            local leWorkspace = game.Workspace:GetChildren()
+            for i,v in pairs(leWorkspace) do
                 local _, trinket = detectTrinkets(v)
                 if _ then
                     local part = trinket:WaitForChild("Part")
