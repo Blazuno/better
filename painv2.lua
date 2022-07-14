@@ -152,28 +152,23 @@ input.InputBegan:Connect(function(key)
             else
                 table.insert(newCoords, word)
             end
-                        wait()
         end
         for i,v in pairs(newCoords) do
             print("CHECKING COORD TABLE: ", i, v)
-                        wait()
         end
         for i,v in pairs(newCoords) do
             if (i+2)%3 == 0 then
                 print("DEBUG: ",v, newCoords[i+1], newCoords[i+2])
                 table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
             end
-                        wait()
         end
         for i,v in pairs(stopPoints2) do
             print("STOP POINTS ",v/3)
-                        wait()
         end
         for i,v in pairs(stopPoints) do
             if v % 3 == 0 then
                 table.insert(stopPoints2, v)
             end
-                        wait()
             print("CFRAME LOOP DEBUG: ",v)
         end
         while true do
@@ -189,7 +184,6 @@ input.InputBegan:Connect(function(key)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                         end
                                     writefile("crashlogs.txt", "CRASHED POINT 4")
-                                    wait()
                     end 
                 else
                     local temp = CFrames[i+1]
@@ -208,10 +202,8 @@ input.InputBegan:Connect(function(key)
                                     writefile("crashlogs.txt", "CRASHED POINT 3")
                     end
                                 writefile("crashlogs.txt", "CRASHED POINT 2")
-                                wait()
                 end
                             writefile("crashlogs.txt", "CRASHED POINT 1")
-                            wait()
             end
         wait(lootCycleWaitTimes*60)
         end
