@@ -208,6 +208,7 @@ input.InputBegan:Connect(function(key)
                         end
                     end
                 end
+                            wait()
             end
         wait(lootCycleWaitTimes*60)
         end
