@@ -29,7 +29,8 @@ function autoPickup(connectTrinket)
     spawn(function()
         local player = game.Players.LocalPlayer
         while isAutoPickup do
-            for i,v in pairs(game.Workspace:GetChildren()) do
+            local workspace = game.Workspace:GetChildren()
+            for i,v in pairs(workspace) do
                 local _, trinket = detectTrinkets(v)
                 if _ then
                     local part = trinket:WaitForChild("Part")
@@ -174,8 +175,8 @@ input.InputBegan:Connect(function(key)
                     local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
                     tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                     wait(time)
-                    for i2,v2 in pairs(stopPoints2) do
-                        if i == v2/3 then
+                    for i2,vd in pairs(stopPoints2) do
+                        if i == vd/3 then
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
                             wait(trinketSpawnWaitTimes)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
