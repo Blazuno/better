@@ -195,6 +195,7 @@ input.InputBegan:Connect(function(key)
                             wait(trinketSpawnWaitTimes)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                         end
+                                    writefile("crashlogs.txt", "CRASHED POINT 4")
                                     wait()
                     end 
                 else
@@ -211,9 +212,12 @@ input.InputBegan:Connect(function(key)
                             wait(trinketSpawnWaitTimes)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                         end
+                                    writefile("crashlogs.txt", "CRASHED POINT 3")
                     end
+                                writefile("crashlogs.txt", "CRASHED POINT 2")
                                 wait()
                 end
+                            writefile("crashlogs.txt", "CRASHED POINT 1")
                             wait()
             end
         wait(lootCycleWaitTimes*60)
