@@ -83,7 +83,6 @@ function autoPickup(connectTrinket)
         local player = game.Players.LocalPlayer
         while isAutoPickup do
             local leWorkspace = game.Workspace:GetChildren()
-            print("DEBUG TABLE TYPE CHECK: ",type(leWorkspace))
             for i,v in pairs(leWorkspace) do
                 local _, trinket = detectTrinkets(v)
                 if _ then
@@ -131,20 +130,22 @@ input.InputBegan:Connect(function(key)
         sphere.Parent = game.Workspace.folderDubs -- Parent it
         sphere.Material = Enum.Material.Neon
         count2 = count2 + 1
-        local encrypted = syn.crypt.encrypt(tostring(sphere.Position.x, " ", sphere.Position.y, " ", sphere.Position.z, " "), "epicness")
-        appendfile("path.txt", encrypted)
+        appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         local stuff = readfile("path.txt")
-        local stuff2 = syn.crypt.decrypt(stuff, "epicness")
         folderCopy = folderDubs:Clone()
-        table.insert(fileSavePoints, count2, stuff2)
+        table.insert(fileSavePoints, count2, stuff)
         table.insert(savePoints, count2, folderCopy)
+        print("DEBUG SAVE POINT FILE CHECK: ",stuff)
+        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.J then
+        print("Another precheck")
         if first2 then
             writefile("path.txt", "")
             first2 = false
         end
         if not game.Workspace:FindFirstChild("folderDubs") then
+            print("FOLDER DEBUG CHECK")
             folderDubs = Instance.new("Folder", game.Workspace)
             folderDubs.Name = "folderDubs"
         end
@@ -157,14 +158,14 @@ input.InputBegan:Connect(function(key)
         sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
         sphere.Parent = game.Workspace.folderDubs -- Parent it
         sphere.Material = Enum.Material.Neon
-        local encrypted = syn.crypt.encrypt(tostring("(", sphere.Position.x, " ", sphere.Position.y, " ", sphere.Position.z, " "), "epicness")
-        appendfile("path.txt", encrypted)
+        appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         count2 = count2 + 1
         folderCopy = folderDubs:Clone()
+        print("DEBUG TYPE CHECK: ",type(count2))
         table.insert(savePoints, count2, folderCopy)
         local stuff = readfile("path.txt")
-        local stuff2 = syn.crypt.decrypt(stuff, "epicness")
-        table.insert(fileSavePoints, count2, stuff2)
+        table.insert(fileSavePoints, count2, stuff)
+        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.Y then
         folderDubs:Destroy()
@@ -190,12 +191,14 @@ input.InputBegan:Connect(function(key)
         local stopPoints = {}
         local stopPoints2 = {}
         if not isfile("path.txt") then return end
-        stuff2 = readfile("path.txt")
-        stuff = syn.crypt.decrypted(stuff2, epicness)
+        stuff = readfile("path.txt")
+        print(stuff)
         spawn(function()loadstring(game:HttpGet("https://pastebin.com/raw/ERDp2x5W", true))()
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
+            print("COUNT CHECK: ",count)
             if word:sub(1, 1) == "(" then
+                print("STOP POINT FOUND: ",count)
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             else
@@ -203,18 +206,22 @@ input.InputBegan:Connect(function(key)
             end
         end
         for i,v in pairs(newCoords) do
+            print("CHECKING COORD TABLE: ", i, v)
         end
         for i,v in pairs(newCoords) do
             if (i+2)%3 == 0 then
+                print("DEBUG: ",v, newCoords[i+1], newCoords[i+2])
                 table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
             end
         end
-        for i,v in pairs(stopPoints2) do
+        for i,v in pairs(stopPoints) do
+            print("STOP POINTS ",(v+2)/3)
         end
         for i,v in pairs(stopPoints) do
-            if v % 3 == 0 then
+            if (v + 2) % 3 == 0 then
                 table.insert(stopPoints2, v)
             end
+            print("CFRAME LOOP DEBUG: ",v)
         end
         while true do
             for i,v in pairs(CFrames) do
@@ -223,7 +230,7 @@ input.InputBegan:Connect(function(key)
                     tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                     wait(time)
                     for i2,vd in pairs(stopPoints2) do
-                        if i == vd/3 then
+                        if i == (vd+2)/3 then
                             game.Players.LocalPlayer.Character.Torso.Anchored = true
                             wait(trinketSpawnWaitTimes)
                             game.Players.LocalPlayer.Character.Torso.Anchored = false
@@ -252,4 +259,3 @@ input.InputBegan:Connect(function(key)
     end)
 end
 end)
-
