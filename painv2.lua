@@ -138,17 +138,13 @@ input.InputBegan:Connect(function(key)
         folderCopy = folderDubs:Clone()
         table.insert(fileSavePoints, count2, stuff2)
         table.insert(savePoints, count2, folderCopy)
-        print("DEBUG SAVE POINT FILE CHECK: ",stuff2)
-        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.J then
-        print("Another precheck")
         if first2 then
             writefile("path.txt", "")
             first2 = false
         end
         if not game.Workspace:FindFirstChild("folderDubs") then
-            print("FOLDER DEBUG CHECK")
             folderDubs = Instance.new("Folder", game.Workspace)
             folderDubs.Name = "folderDubs"
         end
@@ -165,12 +161,10 @@ input.InputBegan:Connect(function(key)
         appendfile("path.txt", encrypted)
         count2 = count2 + 1
         folderCopy = folderDubs:Clone()
-        print("DEBUG TYPE CHECK: ",type(count2))
         table.insert(savePoints, count2, folderCopy)
         local stuff = readfile("path.txt")
         local stuff2 = syn.crypt.decrypt(stuff, "epicness")
         table.insert(fileSavePoints, count2, stuff2)
-        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.Y then
         folderDubs:Destroy()
@@ -198,13 +192,10 @@ input.InputBegan:Connect(function(key)
         if not isfile("path.txt") then return end
         stuff2 = readfile("path.txt")
         stuff = syn.crypt.decrypted(stuff2, epicness)
-        print(stuff)
         spawn(function()loadstring(game:HttpGet("https://pastebin.com/raw/ERDp2x5W", true))()
         for word in stuff:gmatch("(.-)".." ") do  
             count = count + 1
-            print("COUNT CHECK: ",count)
             if word:sub(1, 1) == "(" then
-                print("STOP POINT FOUND: ",count)
                 table.insert(stopPoints, count)
                 table.insert(newCoords, string.sub(word, 2))
             else
@@ -212,22 +203,18 @@ input.InputBegan:Connect(function(key)
             end
         end
         for i,v in pairs(newCoords) do
-            print("CHECKING COORD TABLE: ", i, v)
         end
         for i,v in pairs(newCoords) do
             if (i+2)%3 == 0 then
-                print("DEBUG: ",v, newCoords[i+1], newCoords[i+2])
                 table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
             end
         end
         for i,v in pairs(stopPoints2) do
-            print("STOP POINTS ",v/3)
         end
         for i,v in pairs(stopPoints) do
             if v % 3 == 0 then
                 table.insert(stopPoints2, v)
             end
-            print("CFRAME LOOP DEBUG: ",v)
         end
         while true do
             for i,v in pairs(CFrames) do
