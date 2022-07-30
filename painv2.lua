@@ -1,7 +1,9 @@
-local keys = {"$B&E(H+MbQeThWmZ"}
+local keys = {"$B&E(H+MbQeThWmZ",
+    "H+MbQeThWmZq4t7w"}
 local hwids = {
     "111ff687575ee3631836b9c9567660f0e2a50be7ff80dd7351fdbb9373832468758d008a3a1cea4181a1c3e101e73c074f7f0fd98a3ed05806c529f7c5508fdf",
     "f647159585b6c1bda3721204ebb2ee3f0d5cebf3a0625afe803111d2db2457d9b3a6ca93069bb281e0415aeabdda3aa0514a85e45371c1bcf910b9152b369845",
+    "0240a6ea9cfef09494618e01115d6b658de0a68298e9b5b063f19a2168dabd9f159ddf8e086e847049b238477efa0e94eeb77bbc6dbd2efcf7ae4e0ca84cc0ab"
 }
 local first = true
 local first2 = true
