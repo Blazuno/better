@@ -226,6 +226,12 @@ input.InputBegan:Connect(function(key)
             print("CFRAME LOOP DEBUG: ",v)
         end
         while true do
+                        spawn(function()
+                                while true do
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                                    wait()
+                                   end
+                               end
             for i,v in pairs(CFrames) do
                 if first then
                     local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
