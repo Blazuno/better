@@ -225,13 +225,13 @@ input.InputBegan:Connect(function(key)
             end
             print("CFRAME LOOP DEBUG: ",v)
         end
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-        game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
         while true do
             for i,v in pairs(CFrames) do
                 if first then
                     local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
                     tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+        game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
                     wait(time)
                     for i2,vd in pairs(stopPoints2) do
                         if i == (vd+2)/3 then
@@ -248,7 +248,9 @@ input.InputBegan:Connect(function(key)
                     local distance = (temp1 - temp2).magnitude
                     local time = calculateTime(speed, distance)
                     tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
-                    wait(time)
+                      game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+        game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+                                wait(time)
                     for i2, v2 in pairs(stopPoints2) do
                         if i == v2/3 then
                             wait(trinketSpawnWaitTimes)
