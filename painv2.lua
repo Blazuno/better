@@ -225,7 +225,7 @@ input.InputBegan:Connect(function(key)
             end
             print("CFRAME LOOP DEBUG: ",v)
         end
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+        game.Players.LocalPlayer.Character.Torso.Anchored = true
         while true do
             for i,v in pairs(CFrames) do
                 if first then
