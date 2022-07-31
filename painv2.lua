@@ -246,7 +246,7 @@ input.InputBegan:Connect(function(key)
                     local temp2 = Vector3.new(temp.x, temp.y, temp.z)
                     local distance = (temp1 - temp2).magnitude
                     local time = calculateTime(speed, distance)
-                    tweenService:Create(game.Players.LocalPlayer.Character.Torso, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                    tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                     wait(time)
                     for i2, v2 in pairs(stopPoints2) do
                         if i == v2/3 then
