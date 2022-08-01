@@ -8,6 +8,8 @@ local hwids = {
 local first = true
 local first2 = true
 local first3 = true
+local lines = Instance.new("Folder", game.Workspace)
+lines.Name = "lines"
 local count = 0
 local count2 = 0
 local quickCount = 0
@@ -126,14 +128,33 @@ input.InputBegan:Connect(function(key)
             folderDubs.Name = "folderDubs"
         end
         local sphere = Instance.new('Part')
-        sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
-        sphere.Shape = Enum.PartType.Ball -- Make it a sphere
+        sphere.Size = Vector3.new(1, 1, 1) 
+        sphere.Shape = Enum.PartType.Ball
         sphere.Anchored = true
         sphere.CanCollide = false
-        sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
-        sphere.Parent = game.Workspace.folderDubs -- Parent it
+        sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+        sphere.Parent = game.Workspace.folderDubs 
         sphere.Material = Enum.Material.Neon
         count2 = count2 + 1
+        local folderForDubs = folderDubs:GetChildren()
+        if count2 >= 1 then
+            local leCount = count2
+            local line = Instance.new("Part")
+            line.Anchored = true
+            wait()
+            line.CanCollide = false
+            local part1 = folderForDubs[leCount - 1]
+            local part2 = folderForDubs[leCount]
+            print("DEBUG PART TYPE CHECK: "..part1.Name..part2.Name)
+            print("CONTINUE CHECK")
+            line.Parent = game.Workspace.lines
+            line.Material = Enum.Material.Neon
+            wait()
+            line.Size = Vector3.new(0.1, 0.1, (part1.Position - part2.Position).Magnitude)
+            wait()
+            local position = (part1.Position + part2.Position)/2
+            line.CFrame = CFrame.lookAt(position, part2.Position)
+        end
         appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         local stuff = readfile("path.txt")
         folderCopy = folderDubs:Clone()
@@ -164,6 +185,24 @@ input.InputBegan:Connect(function(key)
         sphere.Material = Enum.Material.Neon
         appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         count2 = count2 + 1
+        if count2 >= 1 then
+            local leCount = count2
+            local line = Instance.new("Part")
+            line.Anchored = true
+            wait()
+            line.CanCollide = false
+            local part1 = folderForDubs[leCount - 1]
+            local part2 = folderForDubs[leCount]
+            print("DEBUG PART TYPE CHECK: "..part1.Name..part2.Name)
+            print("CONTINUE CHECK")
+            line.Parent = game.Workspace.lines
+            line.Material = Enum.Material.Neon
+            wait()
+            line.Size = Vector3.new(0.1, 0.1, (part1.Position - part2.Position).Magnitude)
+            wait()
+            local position = (part1.Position + part2.Position)/2
+            line.CFrame = CFrame.lookAt(position, part2.Position)
+        end
         folderCopy = folderDubs:Clone()
         print("DEBUG TYPE CHECK: ",type(count2))
         table.insert(savePoints, count2, folderCopy)
