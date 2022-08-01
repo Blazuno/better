@@ -226,16 +226,17 @@ input.InputBegan:Connect(function(key)
             print("CFRAME LOOP DEBUG: ",v)
         end
         while true do
-            game.Players.LocalPlayer.Character.Torso.Anchored = true
             for i,v in pairs(CFrames) do
                 if first then
                     local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
-                    tweenService:Create(game.Players.LocalPlayer.Character.Torso, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                    tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                     game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
                     wait(time)
                     for i2,vd in pairs(stopPoints2) do
                         if i == (vd+2)/3 then
+                            game.Players.LocalPlayer.Character.Torso.Anchored = true
                             wait(trinketSpawnWaitTimes)
+                            game.Players.LocalPlayer.Character.Torso.Anchored = false
                         end
                                     writefile("crashlogs.txt", "CRASHED POINT 4")
                     end 
@@ -245,12 +246,14 @@ input.InputBegan:Connect(function(key)
                     local temp2 = Vector3.new(temp.x, temp.y, temp.z)
                     local distance = (temp1 - temp2).magnitude
                     local time = calculateTime(speed, distance)
-                    tweenService:Create(game.Players.LocalPlayer.Character.Torso, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                    tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
                     game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
                                 wait(time)
                     for i2, v2 in pairs(stopPoints2) do
                         if i == v2/3 then
+                            game.Players.LocalPlayer.Character.Torso.Anchored = true
                             wait(trinketSpawnWaitTimes)
+                            game.Players.LocalPlayer.Character.Torso.Anchored = false
                         end
                     end
                 end
