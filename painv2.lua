@@ -306,6 +306,7 @@ input.InputBegan:Connect(function(key)
                         end
                     end
                 end
+                game.Workspace.Gravity = 196.2
             wait(lootCycleWaitTimes*60)
             end
         else
