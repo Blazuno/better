@@ -17,6 +17,7 @@ local savePoints = {}
 local fileSavePoints = {}
 local isAutoPickup = true
 local toggle = true
+local lineOld = {}
 input = game:GetService("UserInputService")
 tweenService = game:GetService("TweenService")
 
@@ -160,6 +161,7 @@ input.InputBegan:Connect(function(key)
         folderCopy = folderDubs:Clone()
         table.insert(fileSavePoints, count2, stuff)
         table.insert(savePoints, count2, folderCopy)
+        table.insert(lineOld, count2, lines)
         print("DEBUG SAVE POINT FILE CHECK: ",stuff)
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
@@ -207,6 +209,7 @@ input.InputBegan:Connect(function(key)
         print("DEBUG TYPE CHECK: ",type(count2))
         table.insert(savePoints, count2, folderCopy)
         local stuff = readfile("path.txt")
+        table.insert(lineOld, count2, lines)
         table.insert(fileSavePoints, count2, stuff)
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
@@ -214,6 +217,9 @@ input.InputBegan:Connect(function(key)
         folderDubs:Destroy()
         folderDubs = Instance.new("Folder", game.Workspace)
         folderDubs.Name = "folderDubs"
+        lines:Destroy()
+        lines = Instance.new("Folder", game.Workspace)
+        lines.Name = "lines"
         delfile("path.txt")
         first2 = true
         count = 0
@@ -224,6 +230,8 @@ input.InputBegan:Connect(function(key)
         folderDubs:Destroy()
         folderDubs = savePoints[count2]:Clone()
         folderDubs.Parent = game.Workspace
+        lines:Destroy()
+        lines = lineOld[count2]:Clone()
         writefile("path.txt", fileSavePoints[count2])
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
@@ -272,6 +280,12 @@ input.InputBegan:Connect(function(key)
             end
             while true do
                 if toggle then return end
+                spawn(function()
+                    while true do
+                        if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true end
+                        wait()
+                    end
+                end)
                 game.Workspace.Gravity = 0
                 for i,v in pairs(CFrames) do
                     if toggle then return end
@@ -306,7 +320,6 @@ input.InputBegan:Connect(function(key)
                         end
                     end
                 end
-                game.Workspace.Gravity = 196.2
             wait(lootCycleWaitTimes*60)
             end
         else
