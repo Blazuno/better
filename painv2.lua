@@ -228,7 +228,6 @@ input.InputBegan:Connect(function(key)
             end
             for i,v in pairs(newCoords) do
                 if (i+2)%3 == 0 then
-                    print("DEBUG: ",v, newCoords[i+1], newCoords[i+2])
                     table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
                 end
             end
@@ -283,6 +282,7 @@ input.InputBegan:Connect(function(key)
                         end
                     end
                 end
+            game.Workspace.Gravity = 196.2
             wait(lootCycleWaitTimes*60)
             end
         else
