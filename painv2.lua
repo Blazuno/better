@@ -1,12 +1,3 @@
-getgenv().speed = 40
-getgenv().trinketSpawnWaitTimes = 5 -- in seconds
-getgenv().lootCycleWaitTimes = 0.25 -- in minutes
-getgenv().key = "$B&E(H+MbQeThWmZ" -- KEY GOES HERE
---E TO PLACE NORMAL POINT
---J TO PLACE TRINKET WAIT POINT
---Y TO RESTART/DESTROY PATH (NOTE THAT THIS APPLIES TO THE SAVED PATH)
---H TO START PATH
---T TO UNDO WHEN MAKING PATH
 local keys = {"$B&E(H+MbQeThWmZ",
     "H+MbQeThWmZq4t7w"}
 local hwids = {
@@ -207,7 +198,7 @@ input.InputBegan:Connect(function(key)
             local stopPoints = {}
             local stopPoints2 = {}
             if not isfile("path.txt") then return end
-            stuff = readfile("path.txt")
+            local stuff = readfile("path.txt")
             print(stuff)
             spawn(function()
                 loadstring(game:HttpGet(("https://pastebin.com/raw/ERDp2x5W"),true))()
@@ -287,6 +278,7 @@ input.InputBegan:Connect(function(key)
             end
         else
             toggle = true
+            count = 0
             game.Workspace.Gravity = 196.2
             game.Players.LocalPlayer.Character.Torso.Anchored = false
         end
