@@ -1,3 +1,12 @@
+getgenv().speed = 40
+getgenv().trinketSpawnWaitTimes = 5 -- in seconds
+getgenv().lootCycleWaitTimes = 0.25 -- in minutes
+getgenv().key = "$B&E(H+MbQeThWmZ" -- KEY GOES HERE
+--E TO PLACE NORMAL POINT
+--J TO PLACE TRINKET WAIT POINT
+--Y TO RESTART/DESTROY PATH (NOTE THAT THIS APPLIES TO THE SAVED PATH)
+--H TO START PATH
+--T TO UNDO WHEN MAKING PATH
 local keys = {"$B&E(H+MbQeThWmZ",
     "H+MbQeThWmZq4t7w"}
 local hwids = {
@@ -8,8 +17,6 @@ local hwids = {
 local first = true
 local first2 = true
 local first3 = true
-local lines = Instance.new("Folder", game.Workspace)
-lines.Name = "lines"
 local count = 0
 local count2 = 0
 local quickCount = 0
@@ -17,7 +24,6 @@ local savePoints = {}
 local fileSavePoints = {}
 local isAutoPickup = true
 local toggle = true
-local lineOld = {}
 input = game:GetService("UserInputService")
 tweenService = game:GetService("TweenService")
 
@@ -138,30 +144,11 @@ input.InputBegan:Connect(function(key)
         sphere.Material = Enum.Material.Neon
         count2 = count2 + 1
         local folderForDubs = folderDubs:GetChildren()
-        if count2 >= 1 then
-            local leCount = count2
-            local line = Instance.new("Part")
-            line.Anchored = true
-            wait()
-            line.CanCollide = false
-            local part1 = folderForDubs[leCount - 1]
-            local part2 = folderForDubs[leCount]
-            print("DEBUG PART TYPE CHECK: "..part1.Name..part2.Name)
-            print("CONTINUE CHECK")
-            line.Parent = game.Workspace.lines
-            line.Material = Enum.Material.Neon
-            wait()
-            line.Size = Vector3.new(0.1, 0.1, (part1.Position - part2.Position).Magnitude)
-            wait()
-            local position = (part1.Position + part2.Position)/2
-            line.CFrame = CFrame.lookAt(position, part2.Position)
-        end
         appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         local stuff = readfile("path.txt")
         folderCopy = folderDubs:Clone()
         table.insert(fileSavePoints, count2, stuff)
         table.insert(savePoints, count2, folderCopy)
-        table.insert(lineOld, count2, lines)
         print("DEBUG SAVE POINT FILE CHECK: ",stuff)
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
@@ -187,29 +174,10 @@ input.InputBegan:Connect(function(key)
         sphere.Material = Enum.Material.Neon
         appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
         count2 = count2 + 1
-        if count2 >= 1 then
-            local leCount = count2
-            local line = Instance.new("Part")
-            line.Anchored = true
-            wait()
-            line.CanCollide = false
-            local part1 = folderForDubs[leCount - 1]
-            local part2 = folderForDubs[leCount]
-            print("DEBUG PART TYPE CHECK: "..part1.Name..part2.Name)
-            print("CONTINUE CHECK")
-            line.Parent = game.Workspace.lines
-            line.Material = Enum.Material.Neon
-            wait()
-            line.Size = Vector3.new(0.1, 0.1, (part1.Position - part2.Position).Magnitude)
-            wait()
-            local position = (part1.Position + part2.Position)/2
-            line.CFrame = CFrame.lookAt(position, part2.Position)
-        end
         folderCopy = folderDubs:Clone()
         print("DEBUG TYPE CHECK: ",type(count2))
         table.insert(savePoints, count2, folderCopy)
         local stuff = readfile("path.txt")
-        table.insert(lineOld, count2, lines)
         table.insert(fileSavePoints, count2, stuff)
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
@@ -217,9 +185,6 @@ input.InputBegan:Connect(function(key)
         folderDubs:Destroy()
         folderDubs = Instance.new("Folder", game.Workspace)
         folderDubs.Name = "folderDubs"
-        lines:Destroy()
-        lines = Instance.new("Folder", game.Workspace)
-        lines.Name = "lines"
         delfile("path.txt")
         first2 = true
         count = 0
@@ -230,8 +195,6 @@ input.InputBegan:Connect(function(key)
         folderDubs:Destroy()
         folderDubs = savePoints[count2]:Clone()
         folderDubs.Parent = game.Workspace
-        lines:Destroy()
-        lines = lineOld[count2]:Clone()
         writefile("path.txt", fileSavePoints[count2])
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
