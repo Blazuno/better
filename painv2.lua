@@ -199,105 +199,96 @@ input.InputBegan:Connect(function(key)
         print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.H then
-        if toggle == false then return end
-        local newCoords = {}
-        local CFrames = {} 
-        local stopPoints = {}
-        local stopPoints2 = {}
-        if not isfile("path.txt") then return end
-        stuff = readfile("path.txt")
-        print(stuff)
-        spawn(function()
-            loadstring(game:HttpGet(("https://pastebin.com/raw/ERDp2x5W"),true))()
-        end)
-        for word in stuff:gmatch("(.-)".." ") do  
-            count = count + 1
-            print("COUNT CHECK: ",count)
-            if word:sub(1, 1) == "(" then
-                print("STOP POINT FOUND: ",count)
-                table.insert(stopPoints, count)
-                table.insert(newCoords, string.sub(word, 2))
-            else
-                table.insert(newCoords, word)
+        if toggle then
+            toggle = false
+            autoPickup()
+            local newCoords = {}
+            local CFrames = {} 
+            local stopPoints = {}
+            local stopPoints2 = {}
+            if not isfile("path.txt") then return end
+            stuff = readfile("path.txt")
+            print(stuff)
+            spawn(function()
+                loadstring(game:HttpGet(("https://pastebin.com/raw/ERDp2x5W"),true))()
+            end)
+            for word in stuff:gmatch("(.-)".." ") do  
+                count = count + 1
+                print("COUNT CHECK: ",count)
+                if word:sub(1, 1) == "(" then
+                    print("STOP POINT FOUND: ",count)
+                    table.insert(stopPoints, count)
+                    table.insert(newCoords, string.sub(word, 2))
+                else
+                    table.insert(newCoords, word)
+                end
             end
-        end
-        for i,v in pairs(newCoords) do
-            print("CHECKING COORD TABLE: ", i, v)
-        end
-        for i,v in pairs(newCoords) do
-            if (i+2)%3 == 0 then
-                table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+            for i,v in pairs(newCoords) do
+                print("CHECKING COORD TABLE: ", i, v)
             end
-        end
-        for i,v in pairs(stopPoints) do
-            print("STOP POINTS ",(v+2)/3)
-        end
-        for i,v in pairs(stopPoints) do
-            if (v + 2) % 3 == 0 then
-                table.insert(stopPoints2, v)
+            for i,v in pairs(newCoords) do
+                if (i+2)%3 == 0 then
+                    table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+                end
             end
-            print("CFRAME LOOP DEBUG: ",v)
-        end
-        function help()
-                toggle = false
+            for i,v in pairs(stopPoints) do
+                print("STOP POINTS ",(v+2)/3)
+            end
+            for i,v in pairs(stopPoints) do
+                if (v + 2) % 3 == 0 then
+                    table.insert(stopPoints2, v)
+                end
+                print("CFRAME LOOP DEBUG: ",v)
+            end
+            while true do
+                if toggle then return end
                 spawn(function()
                     while true do
-                        if toggle then return end
+                        if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true end
                         wait()
                     end
                 end)
-                autoPickup()
-                while true do
-                    spawn(function()
-                        while true do
-                            if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = false count2 = 0 game.Workspace.Gravity = 196.2 end
-                            wait()
-                        end
-                    end)
-                    game.Workspace.Gravity = 0
-                    for i,v in pairs(CFrames) do
-                        if first then
-                            local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
-                            tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
-                            game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
-                            wait(time)
-                            for i2,vd in pairs(stopPoints2) do
-                                if i == (vd+2)/3 then
-                                    game.Players.LocalPlayer.Character.Torso.Anchored = true
-                                    wait(trinketSpawnWaitTimes)
-                                    game.Players.LocalPlayer.Character.Torso.Anchored = false
-                                end
-                                            writefile("crashlogs.txt", "CRASHED POINT 4")
-                            end 
-                        else
-                            local temp = CFrames[i+1]
-                            local temp1 = Vector3.new(v.x, v.y, v.z)
-                            local temp2 = Vector3.new(temp.x, temp.y, temp.z)
-                            local distance = (temp1 - temp2).magnitude
-                            local time = calculateTime(speed, distance)
-                            tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
-                            game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
-                                        wait(time)
-                            for i2, v2 in pairs(stopPoints2) do
-                                if i == v2/3 then
-                                    game.Players.LocalPlayer.Character.Torso.Anchored = true
-                                    wait(trinketSpawnWaitTimes)
-                                    game.Players.LocalPlayer.Character.Torso.Anchored = false
-                                end
+                game.Workspace.Gravity = 0
+                for i,v in pairs(CFrames) do
+                    if toggle then return end
+                    if first then
+                        local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
+                        tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                        game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
+                        wait(time)
+                        for i2,vd in pairs(stopPoints2) do
+                            if i == (vd+2)/3 then
+                                game.Players.LocalPlayer.Character.Torso.Anchored = true
+                                wait(trinketSpawnWaitTimes)
+                                game.Players.LocalPlayer.Character.Torso.Anchored = false
+                            end
+                                        writefile("crashlogs.txt", "CRASHED POINT 4")
+                        end 
+                    else
+                        local temp = CFrames[i+1]
+                        local temp1 = Vector3.new(v.x, v.y, v.z)
+                        local temp2 = Vector3.new(temp.x, temp.y, temp.z)
+                        local distance = (temp1 - temp2).magnitude
+                        local time = calculateTime(speed, distance)
+                        tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                        game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
+                                    wait(time)
+                        for i2, v2 in pairs(stopPoints2) do
+                            if i == v2/3 then
+                                game.Players.LocalPlayer.Character.Torso.Anchored = true
+                                wait(trinketSpawnWaitTimes)
+                                game.Players.LocalPlayer.Character.Torso.Anchored = false
                             end
                         end
                     end
-                game.Workspace.Gravity = 196.2
-                wait(lootCycleWaitTimes*60)
                 end
+            game.Workspace.Gravity = 196.2
+            wait(lootCycleWaitTimes*60)
             end
-        if toggle then
-            help()
         else
             toggle = true
-            count = 0
             game.Workspace.Gravity = 196.2
-            game.Players.LocalPlayer.Character.Anchored = false
+            game.Players.LocalPlayer.Character.Torso.Anchored = false
         end
     end
 end)
