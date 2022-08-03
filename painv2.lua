@@ -266,7 +266,7 @@ input.InputBegan:Connect(function(key)
                     if toggle then return end
                     spawn(function()
                         while true do
-                            if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true count2 = 0  end
+                            if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true count = 0  end
                             wait()
                         end
                     end)
@@ -310,7 +310,7 @@ input.InputBegan:Connect(function(key)
                 toggle = false
                 end
             else
-                count2 = 0
+                count = 0
                 toggle = true
                 game.Workspace.Gravity = 196.2
                 game.Players.LocalPlayer.Character.Torso.Anchored = false
