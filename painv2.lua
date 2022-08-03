@@ -15,6 +15,7 @@ local savePoints = {}
 local fileSavePoints = {}
 local isAutoPickup = true
 local toggle = true
+local toggle2 = false
 local idiotProof = false
 local autoDropItems = {
     "Scroll of Sraunus"
@@ -305,10 +306,10 @@ input.InputBegan:Connect(function(key)
                         end
                     end
                 if toggle then return end
-                toggle = true
+                toggle2 = true
                 game.Workspace.Gravity = 196.2
                 wait(lootCycleWaitTimes*60)
-                toggle = false
+                toggle2 = false
                 end
             else
                 count = 0
@@ -320,7 +321,7 @@ input.InputBegan:Connect(function(key)
     end
 end)
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
-    if toggle then
+    if toggle2 then
         for i,v in pairs(autoUseItems) do
             if item.Name == v and iswindowactive() then
                 game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
