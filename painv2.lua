@@ -304,6 +304,7 @@ input.InputBegan:Connect(function(key)
                             end
                         end
                     end
+                if toggle then return end
                 toggle = true
                 game.Workspace.Gravity = 196.2
                 wait(lootCycleWaitTimes*60)
