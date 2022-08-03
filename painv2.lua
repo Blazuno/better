@@ -136,6 +136,7 @@ input.InputBegan:Connect(function(key)
             start:Play()
             idiotProof = true
         end
+    end
     if key.KeyCode == Enum.KeyCode.E then 
         if idiotProof then
             if first2 then
@@ -316,7 +317,6 @@ input.InputBegan:Connect(function(key)
             end
         end
     end
-end
 end)
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
     if toggle then
