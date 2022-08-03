@@ -15,6 +15,15 @@ local savePoints = {}
 local fileSavePoints = {}
 local isAutoPickup = true
 local toggle = true
+local idiotProof = false
+local autoDropItems = {
+    "Scroll of Sraunus"
+}
+local autoUseItems = {
+    "Scroll of Trahere",
+    "Scroll of Telorum",
+    "Ice Essence"
+}
 input = game:GetService("UserInputService")
 tweenService = game:GetService("TweenService")
 
@@ -115,172 +124,215 @@ end
 
 
 input.InputBegan:Connect(function(key)
+    if key.KeyCode == Enum.KeyCode.K then
+        local start = Instance.new("Sound", game.Workspace)
+        local stop = Instance.new("Sound", game.Workspace)
+        start.SoundId = "rbxassetid://4448964821"
+        stop.SoundId = "rbxassetid://4448964198"
+        if idiotProof then
+            stop:Play()
+            idiotProof = false
+        else
+            start:Play()
+            idiotProof = true
+        end
     if key.KeyCode == Enum.KeyCode.E then 
-        if first2 then
-            writefile("path.txt", "")
-            first2 = false
+        if idiotProof then
+            if first2 then
+                writefile("path.txt", "")
+                first2 = false
+            end
+            if not game.Workspace:FindFirstChild("folderDubs") then
+                print("FOLDER DEBUG CHECK")
+                folderDubs = Instance.new("Folder", game.Workspace)
+                folderDubs.Name = "folderDubs"
+            end
+            local sphere = Instance.new('Part')
+            sphere.Size = Vector3.new(1, 1, 1) 
+            sphere.Shape = Enum.PartType.Ball
+            sphere.Anchored = true
+            sphere.CanCollide = false
+            sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+            sphere.Parent = game.Workspace.folderDubs 
+            sphere.Material = Enum.Material.Neon
+            count2 = count2 + 1
+            local folderForDubs = folderDubs:GetChildren()
+            appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
+            local stuff = readfile("path.txt")
+            folderCopy = folderDubs:Clone()
+            table.insert(fileSavePoints, count2, stuff)
+            table.insert(savePoints, count2, folderCopy)
+            print("DEBUG SAVE POINT FILE CHECK: ",stuff)
+            print("DEBUG SAVE POINT REVERSION: ",count2)
         end
-        if not game.Workspace:FindFirstChild("folderDubs") then
-            print("FOLDER DEBUG CHECK")
-            folderDubs = Instance.new("Folder", game.Workspace)
-            folderDubs.Name = "folderDubs"
-        end
-        local sphere = Instance.new('Part')
-        sphere.Size = Vector3.new(1, 1, 1) 
-        sphere.Shape = Enum.PartType.Ball
-        sphere.Anchored = true
-        sphere.CanCollide = false
-        sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
-        sphere.Parent = game.Workspace.folderDubs 
-        sphere.Material = Enum.Material.Neon
-        count2 = count2 + 1
-        local folderForDubs = folderDubs:GetChildren()
-        appendfile("path.txt", sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
-        local stuff = readfile("path.txt")
-        folderCopy = folderDubs:Clone()
-        table.insert(fileSavePoints, count2, stuff)
-        table.insert(savePoints, count2, folderCopy)
-        print("DEBUG SAVE POINT FILE CHECK: ",stuff)
-        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.J then
-        print("Another precheck")
-        if first2 then
-            writefile("path.txt", "")
-            first2 = false
+        if idiotProof then
+            print("Another precheck")
+            if first2 then
+                writefile("path.txt", "")
+                first2 = false
+            end
+            if not game.Workspace:FindFirstChild("folderDubs") then
+                print("FOLDER DEBUG CHECK")
+                folderDubs = Instance.new("Folder", game.Workspace)
+                folderDubs.Name = "folderDubs"
+            end
+            local sphere = Instance.new('Part')
+            sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
+            sphere.Shape = Enum.PartType.Ball -- Make it a sphere
+            sphere.Anchored = true
+            sphere.Color = Color3.fromRGB(0, 0, 255)
+            sphere.CanCollide = false
+            sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
+            sphere.Parent = game.Workspace.folderDubs -- Parent it
+            sphere.Material = Enum.Material.Neon
+            appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
+            count2 = count2 + 1
+            folderCopy = folderDubs:Clone()
+            print("DEBUG TYPE CHECK: ",type(count2))
+            table.insert(savePoints, count2, folderCopy)
+            local stuff = readfile("path.txt")
+            table.insert(fileSavePoints, count2, stuff)
+            print("DEBUG SAVE POINT REVERSION: ",count2)
         end
-        if not game.Workspace:FindFirstChild("folderDubs") then
-            print("FOLDER DEBUG CHECK")
-            folderDubs = Instance.new("Folder", game.Workspace)
-            folderDubs.Name = "folderDubs"
-        end
-        local sphere = Instance.new('Part')
-        sphere.Size = Vector3.new(1, 1, 1) -- Size, 1 is 1 stud by 1 stud.
-        sphere.Shape = Enum.PartType.Ball -- Make it a sphere
-        sphere.Anchored = true
-        sphere.Color = Color3.fromRGB(0, 0, 255)
-        sphere.CanCollide = false
-        sphere.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame -- Position it
-        sphere.Parent = game.Workspace.folderDubs -- Parent it
-        sphere.Material = Enum.Material.Neon
-        appendfile("path.txt", "("..sphere.Position.x.." "..sphere.Position.y.." "..sphere.Position.z.." ")
-        count2 = count2 + 1
-        folderCopy = folderDubs:Clone()
-        print("DEBUG TYPE CHECK: ",type(count2))
-        table.insert(savePoints, count2, folderCopy)
-        local stuff = readfile("path.txt")
-        table.insert(fileSavePoints, count2, stuff)
-        print("DEBUG SAVE POINT REVERSION: ",count2)
     end
     if key.KeyCode == Enum.KeyCode.Y then
-        folderDubs:Destroy()
-        folderDubs = Instance.new("Folder", game.Workspace)
-        folderDubs.Name = "folderDubs"
-        delfile("path.txt")
-        first2 = true
-        count = 0
-        count2 = 0
+        if idiotProof then
+            folderDubs:Destroy()
+            folderDubs = Instance.new("Folder", game.Workspace)
+            folderDubs.Name = "folderDubs"
+            delfile("path.txt")
+            first2 = true
+            count = 0
+            count2 = 0
+        end
     end
     if key.KeyCode == Enum.KeyCode.T then
-        count2 = count2 - 1
-        folderDubs:Destroy()
-        folderDubs = savePoints[count2]:Clone()
-        folderDubs.Parent = game.Workspace
-        writefile("path.txt", fileSavePoints[count2])
-        print("DEBUG SAVE POINT REVERSION: ",count2)
+        if idiotProof then
+            count2 = count2 - 1
+            folderDubs:Destroy()
+            folderDubs = savePoints[count2]:Clone()
+            folderDubs.Parent = game.Workspace
+            writefile("path.txt", fileSavePoints[count2])
+            print("DEBUG SAVE POINT REVERSION: ",count2)
+        end
     end
     if key.KeyCode == Enum.KeyCode.H then
-        if toggle then
-            toggle = false
-            autoPickup()
-            local newCoords = {}
-            local CFrames = {} 
-            local stopPoints = {}
-            local stopPoints2 = {}
-            if not isfile("path.txt") then return end
-            local stuff = readfile("path.txt")
-            print(stuff)
-            spawn(function()
-                loadstring(game:HttpGet(("https://pastebin.com/raw/ERDp2x5W"),true))()
-            end)
-            for word in stuff:gmatch("(.-)".." ") do  
-                count = count + 1
-                print("COUNT CHECK: ",count)
-                if word:sub(1, 1) == "(" then
-                    print("STOP POINT FOUND: ",count)
-                    table.insert(stopPoints, count)
-                    table.insert(newCoords, string.sub(word, 2))
-                else
-                    table.insert(newCoords, word)
-                end
-            end
-            for i,v in pairs(newCoords) do
-                print("CHECKING COORD TABLE: ", i, v)
-            end
-            for i,v in pairs(newCoords) do
-                if (i+2)%3 == 0 then
-                    table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
-                end
-            end
-            for i,v in pairs(stopPoints) do
-                print("STOP POINTS ",(v+2)/3)
-            end
-            for i,v in pairs(stopPoints) do
-                if (v + 2) % 3 == 0 then
-                    table.insert(stopPoints2, v)
-                end
-                print("CFRAME LOOP DEBUG: ",v)
-            end
-            while true do
-                if toggle then return end
+        if idiotProof then
+            if toggle then
+                toggle = false
+                autoPickup()
+                local newCoords = {}
+                local CFrames = {} 
+                local stopPoints = {}
+                local stopPoints2 = {}
+                if not isfile("path.txt") then return end
+                local stuff = readfile("path.txt")
+                print(stuff)
                 spawn(function()
-                    while true do
-                        if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true count2 = 0  end
-                        wait()
-                    end
+                    loadstring(game:HttpGet(("https://pastebin.com/raw/ERDp2x5W"),true))()
                 end)
-                game.Workspace.Gravity = 0
-                for i,v in pairs(CFrames) do
-                    if toggle then return end
-                    if first then
-                        local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
-                        tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
-                        game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
-                        wait(time)
-                        for i2,vd in pairs(stopPoints2) do
-                            if i == (vd+2)/3 then
-                                game.Players.LocalPlayer.Character.Torso.Anchored = true
-                                wait(trinketSpawnWaitTimes)
-                                game.Players.LocalPlayer.Character.Torso.Anchored = false
-                            end
-                                        writefile("crashlogs.txt", "CRASHED POINT 4")
-                        end 
+                for word in stuff:gmatch("(.-)".." ") do  
+                    count = count + 1
+                    print("COUNT CHECK: ",count)
+                    if word:sub(1, 1) == "(" then
+                        print("STOP POINT FOUND: ",count)
+                        table.insert(stopPoints, count)
+                        table.insert(newCoords, string.sub(word, 2))
                     else
-                        local temp = CFrames[i+1]
-                        local temp1 = Vector3.new(v.x, v.y, v.z)
-                        local temp2 = Vector3.new(temp.x, temp.y, temp.z)
-                        local distance = (temp1 - temp2).magnitude
-                        local time = calculateTime(speed, distance)
-                        tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
-                        game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
-                                    wait(time)
-                        for i2, v2 in pairs(stopPoints2) do
-                            if i == v2/3 then
-                                game.Players.LocalPlayer.Character.Torso.Anchored = true
-                                wait(trinketSpawnWaitTimes)
-                                game.Players.LocalPlayer.Character.Torso.Anchored = false
+                        table.insert(newCoords, word)
+                    end
+                end
+                for i,v in pairs(newCoords) do
+                    print("CHECKING COORD TABLE: ", i, v)
+                end
+                for i,v in pairs(newCoords) do
+                    if (i+2)%3 == 0 then
+                        table.insert(CFrames, CFrame.new(v, newCoords[i+1], newCoords[i+2]))
+                    end
+                end
+                for i,v in pairs(stopPoints) do
+                    print("STOP POINTS ",(v+2)/3)
+                end
+                for i,v in pairs(stopPoints) do
+                    if (v + 2) % 3 == 0 then
+                        table.insert(stopPoints2, v)
+                    end
+                    print("CFRAME LOOP DEBUG: ",v)
+                end
+                while true do
+                    if toggle then return end
+                    spawn(function()
+                        while true do
+                            if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true count2 = 0  end
+                            wait()
+                        end
+                    end)
+                    game.Workspace.Gravity = 0
+                    for i,v in pairs(CFrames) do
+                        if toggle then return end
+                        if first then
+                            local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
+                            tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                            game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
+                            wait(time)
+                            for i2,vd in pairs(stopPoints2) do
+                                if i == (vd+2)/3 then
+                                    game.Players.LocalPlayer.Character.Torso.Anchored = true
+                                    wait(trinketSpawnWaitTimes)
+                                    game.Players.LocalPlayer.Character.Torso.Anchored = false
+                                end
+                                            writefile("crashlogs.txt", "CRASHED POINT 4")
+                            end 
+                        else
+                            local temp = CFrames[i+1]
+                            local temp1 = Vector3.new(v.x, v.y, v.z)
+                            local temp2 = Vector3.new(temp.x, temp.y, temp.z)
+                            local distance = (temp1 - temp2).magnitude
+                            local time = calculateTime(speed, distance)
+                            tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
+                            game.Players.LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = "0"
+                                        wait(time)
+                            for i2, v2 in pairs(stopPoints2) do
+                                if i == v2/3 then
+                                    game.Players.LocalPlayer.Character.Torso.Anchored = true
+                                    wait(trinketSpawnWaitTimes)
+                                    game.Players.LocalPlayer.Character.Torso.Anchored = false
+                                end
                             end
                         end
                     end
+                toggle = true
+                game.Workspace.Gravity = 196.2
+                wait(lootCycleWaitTimes*60)
+                toggle = false
                 end
-            game.Workspace.Gravity = 196.2
-            wait(lootCycleWaitTimes*60)
+            else
+                count2 = 0
+                toggle = true
+                game.Workspace.Gravity = 196.2
+                game.Players.LocalPlayer.Character.Torso.Anchored = false
             end
-        else
-            count2 = 0
-            toggle = true
-            game.Workspace.Gravity = 196.2
-            game.Players.LocalPlayer.Character.Torso.Anchored = false
+        end
+    end
+end
+end)
+game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
+    if toggle then
+        for i,v in pairs(autoUseItems) do
+            if item.Name == v and iswindowactive() then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+                mousemoveabs(971, 232)
+                mouse1click()
+            end
+        end
+        for i,v in pairs(autoDropItems) do
+            if item.Name == v then
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+                keypress(VK_BACK)
+                keyrelease(VK_BACK)
+            end
         end
     end
 end)
