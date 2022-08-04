@@ -333,11 +333,13 @@ end)
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
     for i,v in pairs(autoDropItems) do
         if item.Name == v then
-            wait(1)
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-            keypress(08)
-            wait()
-            keyrelease(08)
+            if iswindowactive() then
+                wait(1)
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+                keypress(08)
+                wait()
+                keyrelease(08)
+            end
         end
     end
 end)
