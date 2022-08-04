@@ -1,3 +1,4 @@
+getgenv().reexec = true
 local keys = {"$B&E(H+MbQeThWmZ",
     "H+MbQeThWmZq4t7w"}
 local hwids = {
