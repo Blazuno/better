@@ -332,20 +332,18 @@ input.InputBegan:Connect(function(key)
 end)
 
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
-    if toggle2 then
-        for i,v in pairs(autoUseItems) do
-            if item.Name == v and iswindowactive() then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-                mousemoveabs(971, 232)
-                mouse1click()
-            end
+    for i,v in pairs(autoUseItems) do
+        if item.Name == v and iswindowactive() then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+            mousemoveabs(971, 232)
+            mouse1click()
         end
-        for i,v in pairs(autoDropItems) do
-            if item.Name == v then
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-                keypress(VK_BACK)
-                keyrelease(VK_BACK)
-            end
+    end
+    for i,v in pairs(autoDropItems) do
+        if item.Name == v then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
+            keypress(VK_BACK)
+            keyrelease(VK_BACK)
         end
     end
 end)
