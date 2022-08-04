@@ -17,6 +17,7 @@ local isAutoPickup = true
 local toggle = true
 local toggle2 = false
 local idiotProof = false
+local panic = false
 local autoDropItems = {
     "Scroll of Sraunus"
 }
@@ -128,8 +129,8 @@ input.InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.K then
         local start = Instance.new("Sound", game.Workspace)
         local stop = Instance.new("Sound", game.Workspace)
-        start.SoundId = "rbxassetid://4448964821"
-        stop.SoundId = "rbxassetid://4448964198"
+        start.SoundId = "rbxassetid://10466094437"
+        stop.SoundId = "rbxassetid://10466086786"
         if idiotProof then
             stop:Play()
             idiotProof = false
@@ -218,6 +219,19 @@ input.InputBegan:Connect(function(key)
             folderDubs.Parent = game.Workspace
             writefile("path.txt", fileSavePoints[count2])
             print("DEBUG SAVE POINT REVERSION: ",count2)
+        end
+    end
+    if key.KeyCode == Enum.KeyCode.M then
+        local start = Instance.new("Sound", game.Workspace)
+        local stop = Instance.new("Sound", game.Workspace)
+        start.SoundId = "rbxassetid://10466095835"
+        stop.SoundId = "rbxassetid://10466097566"
+        if not panic then
+            start:Play()
+            panic = true
+        else
+            panic = false
+            stop:Play()
         end
     end
     if key.KeyCode == Enum.KeyCode.H then
@@ -320,6 +334,7 @@ input.InputBegan:Connect(function(key)
         end
     end
 end)
+
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
     if toggle2 then
         for i,v in pairs(autoUseItems) do
@@ -336,5 +351,13 @@ game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
                 keyrelease(VK_BACK)
             end
         end
+    end
+end)
+
+game.Players.PlayerRemoving:Connect(function()
+    if panic then
+        repeat wait() until not game.Players.LocalPlayer.Character:FindFirstChild("Danger")
+        game.Players.LocalPlayer.Character:BreakJoints()
+        toggle = true
     end
 end)
