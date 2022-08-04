@@ -129,8 +129,8 @@ input.InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.K then
         local start = Instance.new("Sound", game.Workspace)
         local stop = Instance.new("Sound", game.Workspace)
-        start.SoundId = "rbxassetid://10466094437"
-        stop.SoundId = "rbxassetid://10466086786"
+        start.SoundId = "rbxassetid://4448964821"
+        stop.SoundId = "rbxassetid://4448964198"
         if idiotProof then
             stop:Play()
             idiotProof = false
@@ -222,16 +222,12 @@ input.InputBegan:Connect(function(key)
         end
     end
     if key.KeyCode == Enum.KeyCode.M then
-        local start = Instance.new("Sound", game.Workspace)
-        local stop = Instance.new("Sound", game.Workspace)
-        start.SoundId = "rbxassetid://10466095835"
-        stop.SoundId = "rbxassetid://10466097566"
         if not panic then
-            start:Play()
+            print("PANIC MODE ENABLED")
             panic = true
         else
+            print("PANIC MODE DISABLED")
             panic = false
-            stop:Play()
         end
     end
     if key.KeyCode == Enum.KeyCode.H then
