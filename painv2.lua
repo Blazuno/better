@@ -342,6 +342,7 @@ game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
     end
     for i,v in pairs(autoDropItems) do
         if item.Name == v then
+            wait(1)
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
             keypress(0x08)
             keyrelease(0x08)
