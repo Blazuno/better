@@ -355,5 +355,6 @@ game.Players.PlayerRemoving:Connect(function()
         repeat wait() until not game.Players.LocalPlayer.Character:FindFirstChild("Danger")
         game.Players.LocalPlayer.Character:BreakJoints()
         toggle = true
+        panic = false
     end
 end)
