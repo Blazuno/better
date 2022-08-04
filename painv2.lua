@@ -20,9 +20,7 @@ local toggle2 = false
 local idiotProof = false
 local panic = false
 local autoDropItems = {
-    "Scroll of Sraunus"
-}
-local autoUseItems = {
+    "Scroll of Sraunus",
     "Scroll of Trahere",
     "Scroll of Telorum",
     "Ice Essence"
@@ -333,13 +331,6 @@ input.InputBegan:Connect(function(key)
 end)
 
 game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
-    for i,v in pairs(autoUseItems) do
-        if item.Name == v and iswindowactive() then
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-            mousemoveabs(971, 232)
-            mouse1click()
-        end
-    end
     for i,v in pairs(autoDropItems) do
         if item.Name == v then
             wait(1)
