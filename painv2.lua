@@ -1,3 +1,18 @@
+local firstEx = true
+local exCount = 0
+spawn(function()
+    while true do
+        wait()
+        if not something or firstEx then
+            exCount = exCount + 1
+            firstEx = false
+            if exCount == 2 then
+                return
+            end
+        end
+    end
+end)
+
 getgenv().reexec = true
 local keys = {"$B&E(H+MbQeThWmZ",
     "H+MbQeThWmZq4t7w"}
@@ -125,7 +140,10 @@ function autoPickup(connectTrinket)
 end
 
 
-input.InputBegan:Connect(function(key)
+local connection = input.InputBegan:Connect(function(key)
+    if exCount == 2 then
+        connection:Disconnect()
+    end
     if key.KeyCode == Enum.KeyCode.K then
         local start = Instance.new("Sound", game.Workspace)
         local stop = Instance.new("Sound", game.Workspace)
@@ -346,7 +364,10 @@ end)
 
 
 
-game.Players.PlayerRemoving:Connect(function()
+local connection2 = game.Players.PlayerRemoving:Connect(function()
+    if exCount == 2 then
+        connection2:Disconnect()
+    end
     if panic then
         repeat wait() until not game.Players.LocalPlayer.Character:FindFirstChild("Danger")
         game.Players.LocalPlayer.Character:BreakJoints()
