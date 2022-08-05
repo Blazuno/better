@@ -1,4 +1,3 @@
-print("hi")
 local firstEx = true
 local exCount = 0
 spawn(function()
