@@ -8,6 +8,7 @@ spawn(function()
             exCount = exCount + 1
             firstEx = false
             if exCount == 2 then
+                    print("Script has been disabled")
                 return
             end
         end
