@@ -27,6 +27,7 @@ local autoDropItems = {
 }
 input = game:GetService("UserInputService")
 tweenService = game:GetService("TweenService")
+virtualUser = game:GetService("VirtualUser")
 
 local http_request = http_request;
 if syn then
@@ -317,6 +318,19 @@ input.InputBegan:Connect(function(key)
                 if toggle then return end
                 toggle2 = true
                 game.Workspace.Gravity = 196.2
+                if iswindowactive() then
+                    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        for i2, v2 in pairs(autoDropItems) do
+                            if v.Name == v2 then
+                                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                wait(1)
+                                keypress(08)
+                                wait(0.05)
+                                keyrelease(08)
+                            end
+                        end
+                    end
+                end
                 wait(lootCycleWaitTimes*60)
                 toggle2 = false
                 end
@@ -330,19 +344,7 @@ input.InputBegan:Connect(function(key)
     end
 end)
 
-game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(item)
-    for i,v in pairs(autoDropItems) do
-        if item.Name == v then
-            if iswindowactive() then
-                wait(1)
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-                keypress(08)
-                wait()
-                keyrelease(08)
-            end
-        end
-    end
-end)
+
 
 game.Players.PlayerRemoving:Connect(function()
     if panic then
