@@ -293,6 +293,7 @@ local connection = input.InputBegan:Connect(function(key)
                 end
                 while true do
                     if toggle then return end
+                    if exCount == 2 then return end
                     spawn(function()
                         while true do
                             if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then toggle = true count = 0  end
