@@ -304,6 +304,7 @@ local connection = input.InputBegan:Connect(function(key)
                     game.Workspace.Gravity = 0
                     for i,v in pairs(CFrames) do
                         if toggle then return end
+                        if exCount == 2 then return end
                         if first then
                             local time = calculateTime(speed, game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(v.x, v.y, v.z)))
                             tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v}):Play()
