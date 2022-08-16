@@ -212,7 +212,6 @@
     
     function ServerHop(t)
         block_random_player()
-        syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
         wait(3)
         game.Players.LocalPlayer:Kick(t)
         wait(3)
@@ -337,6 +336,7 @@
 repeat
     wait()
 until game:IsLoaded()
+syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
 repeat 
     wait()
 until game.PlaceId == 5208655184
