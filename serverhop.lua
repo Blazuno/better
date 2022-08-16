@@ -337,12 +337,13 @@ function serverHopAutoPickup()
     end)
 end
 
-
+print("Check 1")
 
 repeat 
     wait()
 until game.PlaceId == 5208655184
 syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
+print("Check 2")
 repeat
     wait()
 until game:IsLoaded()
@@ -352,6 +353,7 @@ until game.PlaceId == 5208655184
 local serverhopTable = game:GetService("HttpService"):JSONDecode(readfile("BlazeHub/temp.txt"))
 print(serverhopTable)
 if serverhopTable.serverhop then
+    print("Check 3")
     local encrypted = readfile("BlazeHub/Paths/"..serverhopTable.path..".txt")
     local placeholder = syn.crypt.decrypt(encrypted, "joy")
     local count = 0
