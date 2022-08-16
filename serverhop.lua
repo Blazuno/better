@@ -12,17 +12,20 @@ local vim = game:GetService("VirtualInputManager")
 local tweenService = game:GetService("TweenService")
 function antiFrost()
     spawn(function()
-        local chr = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
-        for i,v in pairs(chr:GetChildren()) do
-            if v.Name == "Frostbitten" then
-                v:Destroy()
+        while game.PlaceId == 5208655184 do
+            local chr = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+            for i,v in pairs(chr:GetChildren()) do
+                if v.Name == "Frostbitten" then
+                    v:Destroy()
+                end
             end
+            chr.ChildAdded:Connect(function(child)
+                if child.Name == "Frostbitten" then
+                    child:Destroy()
+                end
+            end)
+            wait()
         end
-        chr.ChildAdded:Connect(function(child)
-            if child.Name == "Frostbitten" then
-                child:Destroy()
-            end
-        end)
     end)
 end
 
