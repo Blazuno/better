@@ -97,30 +97,25 @@ local function identify_trinket(trinket)
     end
 
     if is_part then
-        if tostring(gethiddenproperty(trinket, "size")) == "0.4, 0.5, 0.3" then 
-            print("opal found")
-            return trinket, "common"
-        else 
-            local particle_emitter = trinket:FindFirstChild("ParticleEmitter")
+        local particle_emitter = trinket:FindFirstChild("ParticleEmitter")
 
-            if particle_emitter and tostring(particle_emitter.Color):find("0 1 1 1 0 1 1 1 1 0") then
-                local mesh = trinket:FindFirstChild("Mesh")
+        if particle_emitter and tostring(particle_emitter.Color):find("0 1 1 1 0 1 1 1 1 0") then
+            local mesh = trinket:FindFirstChild("Mesh")
 
-                if mesh and mesh.MeshId:gsub("%%20", ""):match("%d+") == "2877143560" then 
-                    local part_color = trinket.Color
+            if mesh and mesh.MeshId:gsub("%%20", ""):match("%d+") == "2877143560" then 
+                local part_color = trinket.Color
 
-                    if tostring(part_color) == "0.643137, 0.733333, 0.745098" then 
-                        return trinket, "common"
-                    elseif part_color.G > part_color.R and part_color.G > part_color.B then 
-                        return trinket, "common"
-                    elseif part_color.R > part_color.G and part_color.R > part_color.B then 
-                        return trinket, "common"
-                    elseif part_color.B > part_color.G and part_color.B > part_color.R then 
-                        return trinket, "common"
-                    end
+                if tostring(part_color) == "0.643137, 0.733333, 0.745098" then 
+                    return trinket, "common"
+                elseif part_color.G > part_color.R and part_color.G > part_color.B then 
+                    return trinket, "common"
+                elseif part_color.R > part_color.G and part_color.R > part_color.B then 
+                    return trinket, "common"
+                elseif part_color.B > part_color.G and part_color.B > part_color.R then 
+                    return trinket, "common"
                 end
             end
-        end 
+        end
     elseif is_mesh_part then 
         local identified_trinket = rare_trinket_ids[trinket.MeshId:gsub("%%20", ""):match("%d+")]
 
@@ -179,6 +174,7 @@ local function identify_trinket(trinket)
             end
         end
     end
+    return trinket, "common"
 end
 
 
@@ -337,11 +333,12 @@ function serverHopAutoPickup()
     end)
 end
 
-print("Check 1")
 
 
+repeat 
+    wait()
+until game.PlaceId == 5208655184
 syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
-print("Check 2")
 repeat
     wait()
 until game:IsLoaded()
@@ -351,7 +348,6 @@ until game.PlaceId == 5208655184
 local serverhopTable = game:GetService("HttpService"):JSONDecode(readfile("BlazeHub/temp.txt"))
 print(serverhopTable)
 if serverhopTable.serverhop then
-    print("Check 3")
     local encrypted = readfile("BlazeHub/Paths/"..serverhopTable.path..".txt")
     local placeholder = syn.crypt.decrypt(encrypted, "joy")
     local count = 0
@@ -475,7 +471,7 @@ if serverhopTable.serverhop then
                             game.Players.LocalPlayer.Character.Torso.Anchored = false
                             tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v3.CFrame}):Play()
                             wait(time)
-                            fireclickdetector(trinket.Part.ClickDetector)
+                            fireclickdetector(v3.Part.ClickDetector)
                             wait(1)
                         end
                     end
@@ -516,7 +512,7 @@ if serverhopTable.serverhop then
                             game.Players.LocalPlayer.Character.Torso.Anchored = false
                             tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v3.CFrame}):Play()
                             wait(time)
-                            fireclickdetector(trinket.Part.ClickDetector)
+                            fireclickdetector(v3.Part.ClickDetector)
                             wait(1)
                         end
                     end
