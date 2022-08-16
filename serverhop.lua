@@ -339,9 +339,7 @@ end
 
 print("Check 1")
 
-repeat 
-    wait()
-until game.PlaceId == 5208655184
+
 syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
 print("Check 2")
 repeat
