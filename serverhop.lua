@@ -1,3 +1,4 @@
+    print("loading")
     repeat
         wait()
     until game:IsLoaded()
