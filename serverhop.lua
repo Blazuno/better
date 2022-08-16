@@ -1,4 +1,6 @@
-    
+    repeat
+        wait()
+    until game:IsLoaded()
     function calculateTime(s, d)
         local time = d/s
         return time
