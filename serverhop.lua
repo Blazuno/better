@@ -352,7 +352,7 @@ if serverhopTable.serverhop then
     local count = 0
     serverHopAutoPickup()
     detectIllu(serverhopTable)
-    checkNearby(serverhopTable.logRadius, serverhopTable)
+    detectMod()
     antiFrost()
     game:GetService("Workspace").MonsterSpawns.Triggers:Destroy()
     local newCoords = {}
@@ -407,6 +407,7 @@ if serverhopTable.serverhop then
             end
         until game.Players.LocalPlayer.Character
     end
+    checkNearby(serverhopTable.logRadius, serverhopTable)
     spawn(function()
         local Players = game:GetService("Players")
         local ScriptContext = game:GetService("ScriptContext")
