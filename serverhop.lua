@@ -1,4 +1,4 @@
-    
+    syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Blazuno/better/main/serverhop.lua'))()")
     function calculateTime(s, d)
         local time = d/s
         return time
