@@ -463,13 +463,15 @@ if serverhopTable.serverhop then
                             trinket, rarity = identify_trinket(t)
                         end
 
-                        if (_ and game.Players.LocalPlayer:DistanceFromCharacter(v3.Position) <= 50) and (rarity == "common" and serverhopTable.commons) or (rarity == "rare" and serverhopTable.scrolls) or (rarity == "pd" and serverhopTable.pds) or (rarity == "ice" and serverhopTable.ices) or rarity == "artifact" then
+                        if (_ and game.Players.LocalPlayer:DistanceFromCharacter(v3.Position) <= 300) and (rarity == "common" and serverhopTable.commons) or (rarity == "rare" and serverhopTable.scrolls) or (rarity == "pd" and serverhopTable.pds) or (rarity == "ice" and serverhopTable.ices) or rarity == "artifact" then
                             local time = calculateTime(serverhopTable.speed, game.Players.LocalPlayer:DistanceFromCharacter(v3.Position)) 
                             game.Players.LocalPlayer.Character.Torso.Anchored = false
                             tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v3.CFrame}):Play()
                             wait(time)
+                            game.Workspace.Gravity = 196.2
                             fireclickdetector(v3.Part.ClickDetector)
                             wait(1)
+                            game.Workspace.Gravity = 0
                         end
                     end
                     local time = calculateTime(serverhopTable.speed, game.Players.LocalPlayer:DistanceFromCharacter(v.Position))
@@ -504,13 +506,15 @@ if serverhopTable.serverhop then
                             trinket, rarity = identify_trinket(t)
                         end
 
-                        if (_ and game.Players.LocalPlayer:DistanceFromCharacter(v3.Position) <= 50) and (rarity == "common" and serverhopTable.commons) or (rarity == "rare" and serverhopTable.scrolls) or (rarity == "pd" and serverhopTable.pds) or (rarity == "ice" and serverhopTable.ices) or rarity == "artifact" then
+                        if (_ and game.Players.LocalPlayer:DistanceFromCharacter(v3.Position) <= 300) and (rarity == "common" and serverhopTable.commons) or (rarity == "rare" and serverhopTable.scrolls) or (rarity == "pd" and serverhopTable.pds) or (rarity == "ice" and serverhopTable.ices) or rarity == "artifact" then
                             local time = calculateTime(serverhopTable.speed, game.Players.LocalPlayer:DistanceFromCharacter(v3.Position)) 
                             game.Players.LocalPlayer.Character.Torso.Anchored = false
                             tweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = v3.CFrame}):Play()
                             wait(time)
+                            game.Workspace.Gravity = 196.2
                             fireclickdetector(v3.Part.ClickDetector)
                             wait(1)
+                            game.Workspace.Gravity = 0
                         end
                     end
                     local time = calculateTime(serverhopTable.speed, game.Players.LocalPlayer:DistanceFromCharacter(v.Position))
