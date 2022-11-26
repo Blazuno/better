@@ -546,6 +546,7 @@ local gacha_bot = gacha:AddToggle({
             end
         end
         local npc = game.Workspace.NPCs:FindFirstChild("Xenyari") or game.Workspace.NPCs:FindFirstChild("Sayana")
+        print(npc)
         print(webhook:Get())
         if webhook:Get() then
             webhook_url = webhook:Get()
