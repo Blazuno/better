@@ -320,6 +320,7 @@ end
 
 function roll_spell()
     local vector, bool = game.Workspace.CurrentCamera:WorldToScreenPoint(npc.Head.Position)
+    local npc = game.Workspace.NPCs:FindFirstChild("Xenyari") or game.Workspace.NPCs:FindFirstChild("Sayana")
     if bool then
         if game.Workspace:FindFirstChild("Union13") then
             game.Workspace.Union13:Destroy()
@@ -545,7 +546,6 @@ local gacha_bot = gacha:AddToggle({
                 old3 = v:FindFirstChild("Char").Text
             end
         end
-        local npc = game.Workspace.NPCs:FindFirstChild("Xenyari") or game.Workspace.NPCs:FindFirstChild("Sayana")
         print(webhook:Get())
         if webhook:Get() then
             webhook_url = webhook:Get()
