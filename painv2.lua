@@ -318,9 +318,8 @@ function detectMod()
     end
 end
 
-function roll_spell()
+function roll_spell(npc)
     local vector, bool = game.Workspace.CurrentCamera:WorldToScreenPoint(npc.Head.Position)
-    local npc = game.Workspace.NPCs:FindFirstChild("Xenyari") or game.Workspace.NPCs:FindFirstChild("Sayana")
     if bool then
         if game.Workspace:FindFirstChild("Union13") then
             game.Workspace.Union13:Destroy()
@@ -546,6 +545,7 @@ local gacha_bot = gacha:AddToggle({
                 old3 = v:FindFirstChild("Char").Text
             end
         end
+        local npc = game.Workspace.NPCs:FindFirstChild("Xenyari") or game.Workspace.NPCs:FindFirstChild("Sayana")
         print(webhook:Get())
         if webhook:Get() then
             webhook_url = webhook:Get()
@@ -555,7 +555,7 @@ local gacha_bot = gacha:AddToggle({
         if library.Flags["Gacha_Bot"] then
             
             if game.Players.LocalPlayer:DistanceFromCharacter(npc.Torso.Position) < 25 then
-                roll_spell()
+                roll_spell(npc)
             end
             while library.Flags["Gacha_Bot"] do
                 if game.Players.LocalPlayer:DistanceFromCharacter(npc.Torso.Position) >= 25 then
@@ -635,7 +635,7 @@ local gacha_bot = gacha:AddToggle({
                 end
                 if l3:FindFirstChild("Char").Text ~= old3 then
                     old3 = l3:FindFirstChild("Char").Text
-                    roll_spell()
+                    roll_spell(npc)
                 end
                 if library.Flags["Player_Nearby"] then
                     for i,v in pairs(plrList) do
